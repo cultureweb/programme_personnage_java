@@ -9,20 +9,24 @@ public class Warrior {
         private int life;
         //Stock la force de l'attaque de notre guerrier
         private int attack;
-        //Stock le nom de l'arme utilisée par notre guerrier
-        private String weapon;
+        //Stock le nom de l'arme utilisée par notre Class
+        private Weapon weapon;
         //Stock le nom du bouclier utilisée par notre guerrier
         private String shield;
 
         //Constructeur par défaut
+        public Warrior() {
 
-        public Warrior(){
-                name = "";
-                image = "";
-                life = 0;
-                attack = 0;
-                weapon = "";
-                shield = "";
+        }
+
+
+        public Warrior(String name, String image, int life, int attack, String weaponName, int attackLevel, String shield){
+                this.name = name;
+                this.image = image;
+                this.life = life;
+                this.attack = attack;
+                this.weapon = new Weapon(weaponName, attackLevel);
+                this.shield = shield;
 
       }
       // Setters
@@ -42,7 +46,7 @@ public class Warrior {
                 this.attack = attack;
         }
 
-        public void setWeapon(String weapon) {
+        public void setWeapon(Weapon weapon) {
                 this.weapon = weapon;
         }
 
@@ -68,7 +72,7 @@ public class Warrior {
                 return attack;
         }
 
-        public String getWeapon() {
+        public Weapon getWeapon() {
                 return weapon;
         }
 

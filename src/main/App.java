@@ -1,14 +1,54 @@
 package main;
 
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
 
+        //Création d'un objet warrior
+        Warrior warrior = new Warrior();
 
-        System.out.println("Afficher les infos du Guerrier :");
+        Scanner sc = new Scanner(System.in);
 
-         Warrior duncan = new Warrior();
-         duncan.setName("Duncan");
-         duncan.setImage("https://www.google.com/search?q=duncan+warrior&tbm=isch&source=lnt&tbs=itp:clipart&sa=X&ved=0ahUKEwie95Hv9pDiAhXJURUIHaMaDQ8QpwUIIA&biw=958&bih=959&dpr=1");
+        int choice;
+        do {
+            System.out.println("Voullez vous créer un magicien ou un guerrier : tapez 1 pour Magicien et 2 pour Guerrier :");
+            choice = sc.nextInt();
+//            System.out.println(choice);
+        }
+        while (choice != 1 && choice != 2);
+
+
+        System.out.println("Vous avez choisi : " + choice);
+
+        System.out.println("Veuillez saisir un nom de guerrier :");
+        String str = sc.nextLine();
+        System.out.println("Vous avez saisi : " + str);
+        warrior.setName(str);
+
+        System.out.println("Veuillez saisir l'adresse Url d'une image pour votre Guerrier " + warrior.getName());
+        str = sc.nextLine();
+        System.out.println("Vous avez saisi : " + str);
+        warrior.setImage(str);
+        int nbreSaisi;
+        do {
+            System.out.println("Veuillez saisir les points de vie de" + warrior.getName() + "entre 0 et 5");
+            nbreSaisi = sc.nextInt();
+
+        }
+        while (nbreSaisi < 0 || nbreSaisi > 5);
+
+        System.out.println("Vie = " + nbreSaisi);
+        warrior.setLife(nbreSaisi);
+
+//        System.out.println("Veuillez saisir les points de vie de"+ warrior.getName() + "entre 0 et 5");
+//        int num = sc.nextInt();
+//        System.out.println("Vous avez saisi : " + num);
+//        warrior.setLife(num);
+
+
+       /*System.out.println("Afficher les infos du Guerrier :");
+
          duncan.setLife(5);
          duncan.setAttack(3);
          duncan.setWeapon("sword");
@@ -37,11 +77,7 @@ public class App {
         System.out.println("Life :" + merlin.getLife());
         System.out.println("Attack :" + merlin.getAttack());
         System.out.println("Weapon :" + merlin.getSort());
-        System.out.println("Shield :" + merlin.getPotion());
-
-
-
-
+        System.out.println("Shield :" + merlin.getPotion());*/
 
 
     }
