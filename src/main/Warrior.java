@@ -1,3 +1,5 @@
+package main;
+
 public class Warrior {
 
         String name;
