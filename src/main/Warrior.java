@@ -18,6 +18,17 @@ public class Warrior {
         public Warrior() {
 
         }
+    public String toString() {
+        return "Name: " + this.name +
+                "\nimage: " + this.image +
+                "\nLife: " + this.life +
+                "\nattack: " + this.attack +
+                "\nName: " + this.name +
+                "\nWeapon: " + this.weapon.getWeaponName() +
+                "\nWeapon: " + this.weapon.getAttackLevel() +
+                "\nShield: " + this.shield;
+
+    }
 
 
         public Warrior(String name, String image, int life, int attack, String weaponName, int attackLevel, String shield){

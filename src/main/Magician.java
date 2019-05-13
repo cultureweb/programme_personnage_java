@@ -15,6 +15,7 @@ public class Magician {
     public Magician() {
 
     }
+
     public Magician(String name, String image, int life, int attack, String spellName, int attackLevel, String potion){
         this.name = name;
         this.image = image;
@@ -70,5 +71,17 @@ public class Magician {
 
     public String getPotion() {
         return potion;
+    }
+
+    public String toString() {
+        return "Name: " + this.name +
+                "\nimage: " + this.image +
+                "\nLife: " + this.life +
+                "\nattack: " + this.attack +
+                "\nName: " + this.name +
+                "\nSpell: " + this.spell.getSpellName() +
+                "\nSpell: " + this.spell.getAttackLevel() +
+                "\nPotion: " + this.potion;
+
     }
 }
