@@ -4,7 +4,7 @@ public class Weapon {
     //Stock le nom de L'arme du guerrier
     private String weaponName;
     //Stock le niveau d'attaque de notre arme
-    private int attackLevel;
+    private int weaponAttackLevel;
     //Stock le nom de l'arme utilisée par notre Class
 
 
@@ -12,10 +12,10 @@ public class Weapon {
     public Weapon() {
 
     }
-    public Weapon(String weaponName, int attackLevel){
+    public Weapon(String weaponName, int weaponAttackLevel){
 
         this.weaponName = weaponName;
-        this.attackLevel = attackLevel;
+        this.weaponAttackLevel = weaponAttackLevel;
 
     }
 
@@ -24,8 +24,8 @@ public class Weapon {
         this.weaponName = weaponName;
     }
 
-    public void setAttackLevel(int attackLevel) {
-        this.attackLevel = attackLevel;
+    public void setAttackLevel(int weaponAttackLevel) {
+        this.weaponAttackLevel = weaponAttackLevel;
     }
     // Getters
 
@@ -34,6 +34,6 @@ public class Weapon {
     }
 
     public int getAttackLevel() {
-        return attackLevel;
+        return weaponAttackLevel;
     }
 }

@@ -2,23 +2,29 @@ package main;
 
 public class Magician {
 
-    String name;
-    String image;
-    int life;
-    int attack;
-    String sort;
-    String potion;
+    private String name;
+    private String image;
+    private int life;
+    private int attack;
+    private Spell spell;
+    private String potion;
 
 
-    public Magician(){
-        name = "";
-        image = "";
-        life = 0;
-        attack = 0;
-        sort = "";
-        potion = "";
+    //Constructeur par défaut
+
+    public Magician() {
 
     }
+    public Magician(String name, String image, int life, int attack, String spellName, int attackLevel, String potion){
+        this.name = name;
+        this.image = image;
+        this.life = life;
+        this.attack = attack;
+        this.spell = new Spell(spellName, attackLevel);
+        this.potion = potion;
+
+    }
+
     // Setters
     public void setName(String name) {
         this.name = name;
@@ -36,9 +42,7 @@ public class Magician {
         this.attack = attack;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
+    public void setSpell(Spell spell) { this.spell = spell; }
 
     public void setPotion(String potion) {
         this.potion = potion;
@@ -62,9 +66,7 @@ public class Magician {
         return attack;
     }
 
-    public String getSort() {
-        return sort;
-    }
+    public Spell getSpell() { return spell; }
 
     public String getPotion() {
         return potion;
