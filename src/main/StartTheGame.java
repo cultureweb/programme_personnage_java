@@ -6,6 +6,12 @@ public class StartTheGame {
 
     private Character[] characterList = new Character[100];
     private int index = 0;
+//    private int indexCharacterToModify;
+//    private int indexFeatureToModify;
+
+
+
+
 
     public void start() {
         String typeOfCharacterToCreate = chooseTypeOfCharacterToCreate();
@@ -148,10 +154,10 @@ public class StartTheGame {
 
                 System.out.println("Please enter id number you wish to modify");
                 displayCharacterList();
-                int indexOfCharacter = sc.nextInt();
-                System.out.println(indexOfCharacter);
-                int indexOfPropriety = displayCharacterAndReturnIndexToModify(indexOfCharacter);
-                modifyCharacter(indexOfPropriety, indexOfCharacter);
+                int indexCharacterToModify = sc.nextInt();
+                System.out.println(indexCharacterToModify);
+                int indexFeatureToModify = displayCharacterAndReturnIndexToModify(indexCharacterToModify);
+                modifyCharacter(indexFeatureToModify, indexCharacterToModify);
 
                 break;
 
@@ -195,72 +201,105 @@ public class StartTheGame {
 
     private int displayCharacterAndReturnIndexToModify(int idChoice) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Select what you want to modify for this " + characterList[idChoice].getClass().getSimpleName() + "\n" + characterList[idChoice].toStringWithIndex() + "\n");
-        int id = sc.nextInt();
-        sc.nextLine();
-        System.out.println(id);
-        return id;
+       // sc.nextLine();
+        System.out.println("Select what you want to modify for this " +
+                characterList[idChoice].getClass().getSimpleName() +
+                "\n" + characterList[idChoice].toStringWithIndex() +
+                "\n"+
+                "\n0 _ Back to the Menu ");
+        int choiceMenu = sc.nextInt();
+        System.out.println(choiceMenu);
+        return choiceMenu;
     }
 
-    private void modifyCharacter(int indexOfPropriety, int indexOfCharacter) {
-        switch (indexOfPropriety) {
+    private void modifyCharacter(int indexFeatureToModify, int indexCharacterToModify) {
+        switch (indexFeatureToModify) {
+            case 0:
+                whatNext();
+                break;
             case 1:
-                System.out.println("You want to modify the name: " + characterList[indexOfCharacter].getName());
-                characterList[indexOfCharacter].setName(askAndRecordStringDataFromConsole("Please Enter a new name"));
-                System.out.println("Your new name is: " + characterList[indexOfCharacter].getName());
+                System.out.println("You want to modify the name: " + characterList[indexCharacterToModify].getName());
+                characterList[indexCharacterToModify].setName(askAndRecordStringDataFromConsole("Please Enter a new name"));
+                System.out.println("Your new name is: " + characterList[indexCharacterToModify].getName());
+                displayCharacterAndReturnIndexToModify(indexCharacterToModify);
+                break;
 
             case 2:
-                System.out.println("You want to modify the image: " + characterList[indexOfCharacter].getImage());
-                characterList[indexOfCharacter].setImage(askAndRecordStringDataFromConsole("Please Enter a new URL for your image "));
-                System.out.println("Your new image is: " + characterList[indexOfCharacter].getImage());
+                System.out.println("You want to modify the image: " + characterList[indexCharacterToModify].getImage());
+                characterList[indexCharacterToModify].setImage(askAndRecordStringDataFromConsole("Please Enter a new URL for your image "));
+                System.out.println("Your new image is: " + characterList[indexCharacterToModify].getImage());
+                break;
 
             case 3:
-                System.out.println("You want to modify the life: " + characterList[indexOfCharacter].getLife());
-                if (characterList[indexOfCharacter].getClass().getSimpleName().equals("Warrior")) {
-                    characterList[indexOfCharacter].setLife(askAndRecordIntegerDataFromConsole("Set a new Life level", 5, 10));
+                System.out.println("You want to modify the life: " + characterList[indexCharacterToModify].getLife());
+                if (characterList[indexCharacterToModify].getClass().getSimpleName().equals("Warrior")) {
+                    characterList[indexCharacterToModify].setLife(askAndRecordIntegerDataFromConsole("Set a new Life level", 5, 10));
                 } else {
-                    characterList[indexOfCharacter].setLife(askAndRecordIntegerDataFromConsole("Set a new  Life level", 3, 6));
+                    characterList[indexCharacterToModify].setLife(askAndRecordIntegerDataFromConsole("Set a new  Life level", 3, 6));
                 }
-                System.out.println("Your new life is: " + characterList[indexOfCharacter].getLife());
+                System.out.println("Your new life is: " + characterList[indexCharacterToModify].getLife());
+                break;
             case 4:
-                System.out.println("You want to modify the Attack: " + characterList[indexOfCharacter].getAttack());
-                if (characterList[indexOfCharacter].getClass().getSimpleName().equals("Warrior")) {
-                    characterList[indexOfCharacter].setLife(askAndRecordIntegerDataFromConsole("Set a new Attack Strength for your warrior", 5, 10));
+                System.out.println("You want to modify the Attack: " + characterList[indexCharacterToModify].getAttack());
+                if (characterList[indexCharacterToModify].getClass().getSimpleName().equals("Warrior")) {
+                    characterList[indexCharacterToModify].setLife(askAndRecordIntegerDataFromConsole("Set a new Attack Strength for your warrior", 5, 10));
                 } else {
-                    characterList[indexOfCharacter].setLife(askAndRecordIntegerDataFromConsole("Set a new Attack Strength for your magician", 8, 15));
+                    characterList[indexCharacterToModify].setLife(askAndRecordIntegerDataFromConsole("Set a new Attack Strength for your magician", 8, 15));
                 }
-                System.out.println("Your new Attack Strength  is: " + characterList[indexOfCharacter].getLife());
+                System.out.println("Your new Attack Strength  is: " + characterList[indexCharacterToModify].getLife());
+                break;
 
             case 5:
-                if (characterList[indexOfCharacter].getClass().getSimpleName().equals("Warrior")) {
-                    String currentWeaponName = ((Warrior) characterList[indexOfCharacter]).getWeapon().getWeaponName();
+                if (characterList[indexCharacterToModify].getClass().getSimpleName().equals("Warrior")) {
+                    String currentWeaponName = ((Warrior) characterList[indexCharacterToModify]).getWeapon().getWeaponName();
                     System.out.println("You want to modify the weapon' name: " + currentWeaponName);
                     String weaponName = (askAndRecordStringDataFromConsole("Please Enter a new name:"));
-                    ((Warrior) characterList[indexOfCharacter]).getWeapon().setWeaponName(weaponName);
-                    System.out.println("Your new weapon's name is: " + ((Warrior) characterList[indexOfCharacter]).getWeapon().getWeaponName());
+                    ((Warrior) characterList[indexCharacterToModify]).getWeapon().setWeaponName(weaponName);
+                    System.out.println("Your new weapon's name is: " + ((Warrior) characterList[indexCharacterToModify]).getWeapon().getWeaponName());
+                    break;
                 } else {
-                    characterList[indexOfCharacter].setImage(askAndRecordStringDataFromConsole("Please Enter a new spell 's name:"));
-                    String currentSpellName = ((Magician) characterList[indexOfCharacter]).getSpell().getSpellName();
-                    System.out.println("You want to modify the weapon' name: " + currentSpellName);
-                    String newWeaponName = (askAndRecordStringDataFromConsole("Please Enter a new name:"));
-                    ((Magician) characterList[indexOfCharacter]).getSpell().setSpellName(newWeaponName);
-                    System.out.println("Your new weapon's name is: " + ((Magician) characterList[indexOfCharacter]).getSpell().getSpellName());
+                   // characterList[indexCharacterToModify].setImage(askAndRecordStringDataFromConsole("Please Enter a new spell 's name:"));
+                    String currentSpellName = ((Magician) characterList[indexCharacterToModify]).getSpell().getSpellName();
+                    System.out.println("You want to modify the spell' name: " + currentSpellName);
+                    String newSpellName = (askAndRecordStringDataFromConsole("Please Enter a new name:"));
+                    ((Magician) characterList[indexCharacterToModify]).getSpell().setSpellName(newSpellName);
+                    System.out.println("Your new spell's name is: " + ((Magician) characterList[indexCharacterToModify]).getSpell().getSpellName());
+                    break;
                 }
 
-
             case 6:
-                if (characterList[indexOfCharacter].getClass().getSimpleName().equals("Warrior")) {
-                    int currentWeaponAttackLevel = ((Warrior) characterList[indexOfCharacter]).getWeapon().getAttackLevel();
+                if (characterList[indexCharacterToModify].getClass().getSimpleName().equals("Warrior")) {
+                    int currentWeaponAttackLevel = ((Warrior) characterList[indexCharacterToModify]).getWeapon().getAttackLevel();
                     System.out.println("You want to modify the weapon's level attack: " + currentWeaponAttackLevel);
                     int newWeaponAttackLevel = askAndRecordIntegerDataFromConsole("Please enter a strength for your spell", 2, 4);
                     System.out.println("Your new weapon's level attack is: " + newWeaponAttackLevel);
                 } else {
-                    int currentSpellAttackLevel = ((Magician) characterList[indexOfCharacter]).getSpell().getAttackLevel();
+                    int currentSpellAttackLevel = ((Magician) characterList[indexCharacterToModify]).getSpell().getAttackLevel();
                     System.out.println("You want to modify the spell's level attack: " + currentSpellAttackLevel);
                     int newSpellAttackLevel = askAndRecordIntegerDataFromConsole("Please enter a strength for your spell", 2, 4);
                     System.out.println("Your new spell's level attack is: " + newSpellAttackLevel);
                 }
-                
+                break;
+
+            case 7:
+                if (characterList[indexCharacterToModify].getClass().getSimpleName().equals("Warrior")) {
+                    String currentShieldName = ((Warrior)characterList[indexCharacterToModify]).getShield();
+                    System.out.println("You want to modify the shield' name: " + currentShieldName);
+                    String newShieldName = (askAndRecordStringDataFromConsole("Please Enter a new name:"));
+                    ((Warrior) characterList[indexCharacterToModify]).setShield(newShieldName);
+                    System.out.println("Your new shield's name is: " + ((Warrior) characterList[indexCharacterToModify]).getShield());
+                    break;
+                } else {
+                    characterList[indexCharacterToModify].setImage(askAndRecordStringDataFromConsole("Please Enter a new spell 's name:"));
+                    String currentSpellName = ((Magician) characterList[indexCharacterToModify]).getPotion();
+                    System.out.println("You want to modify the weapon' name: " + currentSpellName);
+                    String newWeaponName = (askAndRecordStringDataFromConsole("Please Enter a new name:"));
+                    ((Magician) characterList[indexCharacterToModify]).setPotion(newWeaponName);
+                    System.out.println("Your new weapon's name is: " + ((Magician) characterList[indexCharacterToModify]).getPotion());
+                    break;
+
+                }
+
 
 
         }
