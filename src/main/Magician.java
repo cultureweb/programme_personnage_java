@@ -42,4 +42,11 @@ public class Magician extends Character{
                 "\nPotion: " + this.potion;
 
     }
+    public String toStringWithIndex() {
+        return super.toStringWithIndex() +
+                "\n5 - Spell: " + this.spell.getSpellName() +
+                "\n6 - Spell: " + this.spell.getAttackLevel() +
+                "\n7 - Potion: " + this.potion;
+
+    }
 }

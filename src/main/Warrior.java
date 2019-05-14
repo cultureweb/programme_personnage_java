@@ -25,7 +25,13 @@ public class Warrior extends Character{
                 "\nShield: " + this.shield;
 
     }
+    public String toStringWithIndex() {
+        return  super.toStringWithIndex() +
+                "\n5 - Weapon's name: " + this.weapon.getWeaponName() +
+                "\n6 - Weapon's attack: " + this.weapon.getAttackLevel() +
+                "\n7 - Shield: " + this.shield;
 
+    }
 
     // Setters
 

@@ -9,6 +9,9 @@ abstract class Character {
     protected int life;
     //Stock la force de l'attaque de notre perso
     protected int attack;
+
+    // constructeur par défault
+
     public Character(){
 
     }
@@ -18,7 +21,6 @@ abstract class Character {
         this.image = image;
         this.life = life;
         this.attack = attack;
-
 
     }
 
@@ -75,6 +77,13 @@ abstract class Character {
                 "\nimage: " + this.image +
                 "\nLife: " + this.life +
                 "\nattack: " + this.attack ;
+
+    }
+    public String toStringWithIndex() {
+        return "1 - Name: " + this.name +
+                "\n2 - Image: " + this.image +
+                "\n3 - Life: " + this.life +
+                "\n4 - attack: " + this.attack ;
 
     }
 }
