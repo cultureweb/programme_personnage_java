@@ -4,10 +4,8 @@ import java.util.Scanner;
 
 public class StartTheGame {
 
-    private Warrior[] warriorsList = new Warrior[100];
-    private Magician[] magiciansList = new Magician[100];
-    private int magicianIndex = 0;
-    private int warriorIndex = 0;
+    private Character[] characterList = new Character[100];
+    private int index = 0;
 
     public void start() {
         String typeOfCharacterToCreate = chooseTypeOfCharacterToCreate();
@@ -59,8 +57,8 @@ public class StartTheGame {
                 numberEntered = askAndRecordIntegerDataFromConsole("Set Attack Strength for your warrior", 5, 10);
                 warrior.setAttack(numberEntered);
                 System.out.println("Attack: " + warrior.getAttack());
-                warriorsList[warriorIndex] = warrior;
-                warriorIndex++;
+                characterList[index] = warrior;
+                index++;
 
                 break;
 
@@ -86,8 +84,8 @@ public class StartTheGame {
                 numberEntered = askAndRecordIntegerDataFromConsole("Set Attack Strength for your magician", 5, 10);
                 magician.setAttack(numberEntered);
 
-                magiciansList[magicianIndex] = magician;
-                magicianIndex++;
+                characterList[index] = magician;
+                index++;
                 break;
 
         }
@@ -117,16 +115,16 @@ public class StartTheGame {
 
         Scanner sc = new Scanner(System.in);
         String[] myStringArray;
-        myStringArray = new String[]{"display", "Modify", "Create a new"};
+        myStringArray = new String[]{"Display", "Modify", "Create a new", "Display List"};
         int choice;
         do {
             System.out.println("What do you want to do Next ?");
             for (int i = 0; i < myStringArray.length; i++) {
-                System.out.println(i + 1 + "_" + myStringArray[i] + " caracter(s)");
+                System.out.println(i + 1 + "_" + myStringArray[i] + " character(s)");
             }
             choice = sc.nextInt();
         }
-        while (choice != 1 && choice != 2 && choice != 3);
+        while (choice != 1 && choice != 2 && choice != 3 && choice != 4);
 
         LaunchMenu(choice);
         return choice;
@@ -134,6 +132,7 @@ public class StartTheGame {
 
     private void LaunchMenu(int choice) {
         Scanner sc = new Scanner(System.in);
+
         switch (choice) {
             case 1:
 
@@ -142,17 +141,16 @@ public class StartTheGame {
                     choice = sc.nextInt();
                 }
                 while (choice != 1 && choice != 2);
-                if(choice == 1){
-                    for (int i = 0; i < warriorsList.length; i++) {
-                        if (warriorsList[i] != null) {
-                            System.out.println("Warrior Id:" + i + "\n" + warriorsList[i] + "\n");
+                if (choice == 1) {
+                    for (int i = 0; i < characterList.length; i++) {
+                        if (characterList[i] != null  && characterList[i].getClass().getSimpleName().equals("Warrior") ) {
+                            System.out.println("Id:" + i + "\n" + characterList[i] + "\n");
                         }
                     }
-                }
-                else{
-                    for (int i = 0; i < magiciansList.length; i++) {
-                        if (magiciansList[i] != null) {
-                            System.out.println("Magician Id:" + i + "\n" +magiciansList[i] + "\n");
+                } else {
+                    for (int i = 0; i < characterList.length; i++) {
+                        if (characterList[i] != null) {
+                            System.out.println("Magician Id:" + i + "\n" + characterList[i] + "\n");
                         }
                     }
                 }
@@ -170,10 +168,17 @@ public class StartTheGame {
                 createCharacter(typeOfCharacterToCreate);
                 whatNext();
                 break;
-            default:
-                System.out.println("choix invalide");
+            case 4:
+                for (int i = 0; i < characterList.length; i++) {
+                    if (characterList[i] != null) {
+                        System.out.println("Id:" + i + "\n" + characterList[i].getClass().getSimpleName() + "\n" + characterList[i].getName() + "\n");
+                    }
+                }
+                whatNext();
+                break;
+
+
         }
     }
-
 }
 

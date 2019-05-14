@@ -70,7 +70,8 @@ abstract class Character {
 //    abstract void crier();
 
     public String toString() {
-        return "Name: " + this.name +
+        return "Character Type: " + this.getClass().getSimpleName() +
+                "\nName: " + this.name +
                 "\nimage: " + this.image +
                 "\nLife: " + this.life +
                 "\nattack: " + this.attack ;
