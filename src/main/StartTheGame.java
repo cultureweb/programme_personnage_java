@@ -145,14 +145,14 @@ public class StartTheGame {
                 if(choice == 1){
                     for (int i = 0; i < warriorsList.length; i++) {
                         if (warriorsList[i] != null) {
-                            System.out.println("Warrior Id:" + i + "\n" + warriorsList[i].toString() + "\n");
+                            System.out.println("Warrior Id:" + i + "\n" + warriorsList[i] + "\n");
                         }
                     }
                 }
                 else{
                     for (int i = 0; i < magiciansList.length; i++) {
                         if (magiciansList[i] != null) {
-                            System.out.println("Magician Id:" + i + "\n" +magiciansList[i].toString() + "\n");
+                            System.out.println("Magician Id:" + i + "\n" +magiciansList[i] + "\n");
                         }
                     }
                 }
@@ -170,6 +170,8 @@ public class StartTheGame {
                 createCharacter(typeOfCharacterToCreate);
                 whatNext();
                 break;
+            default:
+                System.out.println("choix invalide");
         }
     }
 
