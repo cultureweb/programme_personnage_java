@@ -13,7 +13,11 @@ public class Warrior extends Character{
 
     }
 
-    public Warrior(String weaponName, int attackLevel, String shield) {
+    public Warrior(String name, String image ,int life, int attack, String weaponName, int attackLevel, String shield) {
+        this.name = name;
+        this.image = image;
+        this.life = life;
+        this.attack = attack;
         this.weapon = new Weapon(weaponName, attackLevel);
         this.shield = shield;
 

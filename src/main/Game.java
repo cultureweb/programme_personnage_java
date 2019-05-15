@@ -5,13 +5,16 @@ import java.util.Scanner;
 
 public class Game {
 
-    // TODO : characters => characters
+
     private Character[] characters = new Character[100];
-    private int index = 0;
+    // TODO : index => 0
+    private int index = 1;
 
     public void start() {
-
-        createCharacter(chooseTypeOfCharacterToCreate());
+        // TODO : pour tester  => car si tout fonctionne commenter 1ere ligne et commenter la deuxième ligne
+        Character thomas = new Warrior("tom", "image", 5, 5, "sword", 2, "bouclier");
+        //createCharacter(chooseTypeOfCharacterToCreate());
+        characters[0]=thomas;
         whatNext();
     }
 
@@ -41,26 +44,14 @@ public class Game {
             switch (typeOfCharacterToCreate) {
                 case "warrior":
                     System.out.println("Type: warrior");
-                    Warrior warrior = new Warrior();
-                    warrior.setName(askString("Please enter a name: "));
-
-                    warrior.setImage(askString("Please enter an url link to set your image(avatar): "));
-
-                    numberEntered = askInteger("Set Life level", 5, 10);
-                    warrior.setLife(numberEntered);
-
-                    String weaponRecord = askString("Please enter a weapon's name : ");
-
-
-                    numberEntered = askInteger("Please enter a strength for your weapon", 2, 4);
-                    Weapon weapon = new Weapon(weaponRecord, numberEntered);
-                    warrior.setWeapon(weapon);
-
-                    warrior.setShield(askString("Please enter a name for your Shield: "));
-
-                    numberEntered = askInteger("Set Attack Strength for your warrior", 5, 10);
-                    warrior.setAttack(numberEntered);
-                    System.out.println("Attack: " + warrior.getAttack());
+                    String name = askString("Please enter a name: ");
+                    String image = askString("Please enter an url link to set your image(avatar): ");
+                    int life = askInteger("Set Life level", 5, 10);
+                    int attackLevel = askInteger("Please enter a strength for your weapon", 2, 4);
+                    String weaponName = askString("Please enter a weapon's name : ");
+                    int attack = askInteger("Set Attack Strength for your warrior", 5, 10);
+                    String shieldName = askString("Please enter a name for your Shield: ");
+                    Character warrior = new Warrior(name, image, life, attackLevel, weaponName, attack, shieldName);
                     characters[index] = warrior;
                     index++;
                     break;
@@ -70,22 +61,16 @@ public class Game {
                     System.out.println("Type: magician");
                     Magician magician = new Magician();
                     magician.setName(askString("Please enter a name: "));
-
                     magician.setImage(askString("Please enter an url link to set your image(avatar): "));
-
                     numberEntered = askInteger("Set Life level", 3, 6);
                     magician.setLife(numberEntered);
-
                     String spellRecord = askString("Please enter a spell's name : ");
                     numberEntered = askInteger("Please enter a strength for your spell", 2, 4);
                     Spell spell = new Spell(spellRecord, numberEntered);
                     magician.setSpell(spell);
-
                     magician.setPotion(askString("Please enter a name of potion "));
-
                     numberEntered = askInteger("Set Attack Strength for your magician", 8, 15);
                     magician.setAttack(numberEntered);
-
                     characters[index] = magician;
                     index++;
                     break;
@@ -125,8 +110,8 @@ public class Game {
                 "\n2_Modify character(s)" +
                 "\n3_Create a new character(s)" +
                 "\n4_Display List character(s)" +
-                // "\n5_Delete Character(s)" +
-                "\n5_EXIT";
+                "\n5_Delete Character(s)" +
+                "\n6_EXIT";
         int choice;
 
         do {
@@ -136,11 +121,11 @@ public class Game {
                 System.out.println(menu);
                 choice = sc.nextInt();
             }
-            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5);
+            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5&& choice != 6);
             Launch(choice);
 
         }
-        while (choice != 5);
+        while (choice != 6);
         System.out.println("\n" +
                 "***********************" + "\n\n" +
                 "     Fin du Jeu     " + "\n\n" +
@@ -179,6 +164,13 @@ public class Game {
             case 4:
                 displayCharacterList();
                 //whatNext();
+                break;
+            case 5:
+                System.out.println("Please enter id number you wish to delete");
+                int indexCharacterToDelete = sc.nextInt();
+                System.out.println(indexCharacterToDelete);
+                indexCharacterToDelete = displayCharacterProps(indexCharacterToDelete);
+                characters[indexCharacterToDelete]= null;
                 break;
         }
     }
