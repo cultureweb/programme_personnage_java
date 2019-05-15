@@ -260,7 +260,7 @@ public class StartTheGame {
                     int newSpellAttackLevel = askAndRecordIntegerDataFromConsole("Please enter a strength for your spell", 2, 4);
                     System.out.println("Your new spell's level attack is: " + newSpellAttackLevel);
                 }
-                
+
 
 
         }
