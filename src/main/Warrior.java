@@ -14,14 +14,12 @@ public class Warrior extends Character{
     }
 
     public Warrior(String name, String image ,int life, int attack, String weaponName, int attackLevel, String shield) {
-        this.name = name;
-        this.image = image;
-        this.life = life;
-        this.attack = attack;
+       super(name, image,  life, attack);
         this.weapon = new Weapon(weaponName, attackLevel);
         this.shield = shield;
 
     }
+
     public String toString() {
         return  super.toString() +
                 "\nWeapon: " + this.weapon.getWeaponName() +
