@@ -10,23 +10,20 @@ public class StartTheGame {
 //    private int indexFeatureToModify;
 
 
-
-
-
     public void start() {
-        String typeOfCharacterToCreate = chooseTypeOfCharacterToCreate();
-        createCharacter(typeOfCharacterToCreate);
+       // String typeOfCharacterToCreate = chooseTypeOfCharacterToCreate();
+       // createCharacter(typeOfCharacterToCreate);
+        createCharacter(chooseTypeOfCharacterToCreate());
         whatNext();
     }
 
     private String chooseTypeOfCharacterToCreate() {
 
         Scanner sc = new Scanner(System.in);
-
         int choice;
         String str;
         do {
-            System.out.println("Step-By-Step Choose your character 1-Warrior 2-Magician:");
+            System.out.println("Step-By-Step Choose the character you want to create 1-Warrior 2-Magician:");
             choice = sc.nextInt();
         }
         while (choice != 1 && choice != 2);
@@ -39,8 +36,7 @@ public class StartTheGame {
 
     private void createCharacter(String typeOfCharacterToCreate) {
         int numberEntered;
-        String stringEntered;
-
+       // String stringEntered;
 
         switch (typeOfCharacterToCreate) {
             case "warrior":
@@ -65,11 +61,9 @@ public class StartTheGame {
                 System.out.println("Attack: " + warrior.getAttack());
                 characterList[index] = warrior;
                 index++;
-
                 break;
 
             case "magician":
-
 
                 System.out.println("Choice: magician");
                 Magician magician = new Magician();
@@ -125,13 +119,13 @@ public class StartTheGame {
         int choice;
         do {
             System.out.println("What do you want to do Next ?");
+
             for (int i = 0; i < myStringArray.length; i++) {
                 System.out.println(i + 1 + "_" + myStringArray[i] + " character(s)");
             }
             choice = sc.nextInt();
         }
         while (choice != 1 && choice != 2 && choice != 3 && choice != 4);
-
         LaunchMenu(choice);
         return choice;
     }
@@ -141,12 +135,7 @@ public class StartTheGame {
 
         switch (choice) {
             case 1:
-                do {
-                    System.out.println("What do you want to display : 1_warrior  2_magician");
-                    choice = sc.nextInt();
-                }
-                while (choice != 1 && choice != 2);
-                displayCharacter(choice);
+                displayCharacter();
                 whatNext();
                 break;
 
@@ -157,7 +146,7 @@ public class StartTheGame {
                 int indexCharacterToModify = sc.nextInt();
                 System.out.println(indexCharacterToModify);
                 int indexFeatureToModify = displayCharacterAndReturnIndexToModify(indexCharacterToModify);
-                modifyCharacter(indexFeatureToModify, indexCharacterToModify);
+                editCharacter(indexFeatureToModify, indexCharacterToModify);
 
                 break;
 
@@ -174,19 +163,12 @@ public class StartTheGame {
         }
     }
 
-    private void displayCharacter(int choice) {
-        if (choice == 1) {
-            for (int i = 0; i < characterList.length; i++) {
-                if (characterList[i] != null && characterList[i].getClass().getSimpleName().equals("Warrior")) {
-                    System.out.println("Id:" + i + "\n" + characterList[i] + "\n");
-                }
-            }
-        } else {
+    private void displayCharacter() {
+
             for (int i = 0; i < characterList.length; i++) {
                 if (characterList[i] != null) {
                     System.out.println("Id:" + i + "\n" + characterList[i] + "\n");
                 }
-            }
         }
     }
 
@@ -212,7 +194,10 @@ public class StartTheGame {
         return choiceMenu;
     }
 
-    private void modifyCharacter(int indexFeatureToModify, int indexCharacterToModify) {
+    private void
+            editCharacter(int indexFeatureToModify, int indexCharacterToModify) {
+        Scanner sc = new Scanner(System.in);
+
         switch (indexFeatureToModify) {
             case 0:
                 whatNext();
@@ -221,7 +206,7 @@ public class StartTheGame {
                 System.out.println("You want to modify the name: " + characterList[indexCharacterToModify].getName());
                 characterList[indexCharacterToModify].setName(askAndRecordStringDataFromConsole("Please Enter a new name"));
                 System.out.println("Your new name is: " + characterList[indexCharacterToModify].getName());
-                displayCharacterAndReturnIndexToModify(indexCharacterToModify);
+
                 break;
 
             case 2:
@@ -297,12 +282,9 @@ public class StartTheGame {
                     ((Magician) characterList[indexCharacterToModify]).setPotion(newWeaponName);
                     System.out.println("Your new weapon's name is: " + ((Magician) characterList[indexCharacterToModify]).getPotion());
                     break;
-
                 }
-
-
-
         }
+        displayCharacterAndReturnIndexToModify(indexCharacterToModify);
 
 
     }
