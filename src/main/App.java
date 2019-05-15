@@ -4,7 +4,7 @@ public class App {
 
 
     public static void main(String[] args) {
-        StartTheGame startTheGame = new StartTheGame();
-        startTheGame.start();
+        Game game = new Game();
+        game.start();
     }
 }
