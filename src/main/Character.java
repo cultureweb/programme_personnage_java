@@ -1,6 +1,6 @@
 package main;
 
-abstract class Character {
+public abstract class Character {
     //Stock le nom de notre perso
     protected String name;
     //Stock l'url de l'image de notre perso

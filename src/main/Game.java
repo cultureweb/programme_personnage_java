@@ -5,10 +5,14 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class Game
+ */
 public class Game {
 
     List<Character> characters = new ArrayList<>(); // Create an ArrayList object
-    //private Character[] characters = new Character[100];
+    List<Case> cases = new ArrayList<>();
+
     // TODO : index => 0
     private int index = 1;
 
@@ -20,8 +24,46 @@ public class Game {
         whatNext();
     }
 
-    private String chooseTypeOfCharacterToCreate() {
+    public void createCase() {
+        int Choice = askInteger("How many cases for your game", 10, 50);
+        System.out.println(Choice);
 
+        for (int index = 0; index < Choice; index++) {
+            int randomNumber = 1 + (int)(Math.random() * ((12 - 1) + 1));
+              //System.out.println(randomNumber);
+
+
+            if (randomNumber > 0 && randomNumber < 5) {
+                Case neutral = new Case("neutral");
+                cases.add(neutral);
+
+            }
+            else if (randomNumber > 4 && randomNumber < 10) {
+                Case bonus = new Case("bonus");
+                cases.add(bonus);
+
+            }
+            else if (randomNumber > 9 && randomNumber <= 12){
+                Case enemy = new Case("enemy");
+                cases.add(enemy);
+            }
+
+          System.out.println(""+ index  + cases.get(index) + "\n");
+        }
+//        for (Case i : cases) {
+//
+//            System.out.println(i);
+//        }
+
+    }
+
+    /**
+     * Fonction Choisir entre 1-Warrior ou 2-Magician:
+     *
+     * @return une String.
+     */
+    private String chooseTypeOfCharacterToCreate() {
+        // TODO : Exeption
         Scanner sc = new Scanner(System.in);
         int choice;
         String str;
@@ -38,6 +80,12 @@ public class Game {
         return str;
     }
 
+
+    /**
+     * Crée un personnage selon le type en parametre
+     *
+     * @param typeOfCharacterToCreate
+     */
     private void createCharacter(String typeOfCharacterToCreate) {
         int numberEntered;
         try {
@@ -45,7 +93,7 @@ public class Game {
 
             switch (typeOfCharacterToCreate) {
                 case "warrior":
-                    System.out.println("Type: warrior");
+
                     String name = askString("Please enter a name: ");
                     String image = askString("Please enter an url link to set your image(avatar): ");
                     int life = askInteger("Set Life level", 5, 10);
@@ -84,8 +132,13 @@ public class Game {
 
     }
 
-    // TODO : Rename function
-    private String askString(String question) {
+
+    /**
+     * @param question
+     * @return
+     * @throws InputMismatchException
+     */
+    private String askString(String question) throws InputMismatchException {
         Scanner sc = new Scanner(System.in);
         System.out.println(question);
         String str;
@@ -93,7 +146,12 @@ public class Game {
         return str;
     }
 
-    // TODO : Rename function
+    /**
+     * Retourne l'adresse du profil du Zero.
+     *
+     * @return un chiffre entier
+     * @throws InputMismatchException Si jamais mauvaise saisie .
+     */
     private Integer askInteger(String question, int min, int max) throws InputMismatchException {
 
         Scanner sc = new Scanner(System.in);
@@ -106,6 +164,7 @@ public class Game {
         return numberEntered;
     }
 
+
     private void whatNext() {
         String menu = "What do you want to do Next ?" +
                 "\n1_Display character(s)" +
@@ -113,7 +172,8 @@ public class Game {
                 "\n3_Create a new character(s)" +
                 "\n4_Display List character(s)" +
                 "\n5_Delete Character(s)" +
-                "\n6_EXIT";
+                "\n6_Create Cases" +
+                "\n7_EXIT";
         int choice;
 
         do {
@@ -123,17 +183,16 @@ public class Game {
                 System.out.println(menu);
                 choice = sc.nextInt();
             }
-            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5&& choice != 6);
+            while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7);
             Launch(choice);
 
         }
-        while (choice != 6);
+        while (choice != 7);
         System.out.println("\n" +
                 "***********************" + "\n\n" +
                 "     Fin du Jeu     " + "\n\n" +
                 "**********************" + "\n\n"
         );
-
     }
 
 
@@ -143,7 +202,6 @@ public class Game {
         switch (choice) {
             case 1:
                 displayCharacter();
-                // whatNext();
                 break;
 
             case 2:
@@ -154,18 +212,15 @@ public class Game {
                 System.out.println(indexCharacterToModify);
                 int indexFeatureToModify = displayCharacterProps(indexCharacterToModify);
                 editCharacter(indexFeatureToModify, indexCharacterToModify);
-
                 break;
 
             case 3:
                 String typeOfCharacterToCreate = chooseTypeOfCharacterToCreate();
                 createCharacter(typeOfCharacterToCreate);
-                //whatNext();
                 break;
 
             case 4:
                 displayCharacterList();
-                //whatNext();
                 break;
             case 5:
                 //Delete Method
@@ -175,6 +230,8 @@ public class Game {
                 indexCharacterToDelete = displayCharacterProps(indexCharacterToDelete);
                 characters.remove(indexCharacterToDelete);
                 break;
+            case 6:
+                createCase();
         }
     }
 
@@ -183,21 +240,16 @@ public class Game {
 //            System.out.println(i);
 //        }
         for (int i = 0; i < characters.size(); i++) {
-          //  if (characters[i] != null) {
-                System.out.println("Id:" + i + "\n" + characters.get(i) + "\n");
+            //  if (characters[i] != null) {
+            System.out.println("Id:" + i + "\n" + characters.get(i) + "\n");
             //}
         }
     }
 
     private void displayCharacterList() {
-        for (Character i : characters) {
-            System.out.println(i);
+        for (int i = 0; i < characters.size(); i++) {
+            System.out.println("id number : " + i + " - " + characters.get(i).getClass().getSimpleName() + "'s name: " + characters.get(i).getName() + "\n");
         }
-//        for (int i = 0; i < characters.length ; i++) {
-//           // if (characters(i) != null) {
-//                System.out.println("id number : " + i + " - " + characters(i).getClass().getSimpleName() + "'s name: " + characters(i).getName() + "\n");
-//            //}
-//        }
     }
 
     private int displayCharacterProps(int idChoice) {
